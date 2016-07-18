@@ -66,7 +66,7 @@ public class Interface {
 
         switch (option) {
             case "A":
-                addNewStudent();
+                addNewCustomer();
                 break;
             case "V":
                 addMarks();
@@ -83,6 +83,29 @@ public class Interface {
             case "L":
                 generateRecords();
                 break;
+            case "O":
+                break;
+            case "a":
+                addNewCustomer();
+                break;
+            case "v":
+                addMarks();
+                break;
+            case "d":
+                viewStudents();
+                break;
+            case "f":
+                generateAwards();
+                break;
+            case "s":
+                modules();
+                break;
+            case "l":
+                generateRecords();
+                break;
+            case "o":
+                break;
+
         }
     }
 
@@ -380,7 +403,7 @@ public class Interface {
     /**
      * Method to add new Student.
      */
-    public void addNewStudent() {
+    public void addNewCustomer() {
         System.out.println("Student ID Please: ");
         int studentID = 0;
 
@@ -441,7 +464,7 @@ public class Interface {
                 start();
             } else start();
 
-            //addNewStudent();
+            //addNewCustomer();
         }
     }
 
