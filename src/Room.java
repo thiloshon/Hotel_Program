@@ -29,15 +29,4 @@ public class Room implements java.io.Serializable {
         return roomID;
     }
 
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
-    }
-
-    public String getRoomSize() {
-        return roomSize;
-    }
-
-    public void setRoomSize(String roomSize) {
-        this.roomSize = roomSize;
-    }
 }

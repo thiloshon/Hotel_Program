@@ -29,23 +29,11 @@ public class Customer implements java.io.Serializable {
         return iDNo;
     }
 
-    public void setiDNo(String iDNo) {
-        this.iDNo = iDNo;
-    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getNumberOfMembers() {
-        return numberOfMembers;
-    }
-
-    public void setNumberOfMembers(String numberOfMembers) {
-        this.numberOfMembers = numberOfMembers;
-    }
 }
