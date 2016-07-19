@@ -17,7 +17,7 @@ public class FileHandler {
      * This method saves the student objects in the binary format to the file.
      */
     public static void saveCustomerDataToFile(){
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Customer.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Customer.txt");
 
 
         FileOutputStream fos = null;
@@ -56,7 +56,7 @@ public class FileHandler {
      * This method loads the student objects in the binary format from the file.
      */
     public static void LoadCustomerDataFromFile() {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Customer.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Customer.txt");
         FileInputStream fis = null;
         //System.out.print("hi1");
         try {
@@ -117,7 +117,7 @@ public class FileHandler {
      * This method saves the Take objects in the binary format to the file.
      */
     public static void saveRoomDataToFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Room.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Room.txt");
 
         FileOutputStream fos = null;
         try {
@@ -157,7 +157,7 @@ public class FileHandler {
      * This method loads the take objects in the binary format from the file.
      */
     public static void LoadRoomDataFromFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Room.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Room.txt");
         FileInputStream fis = null;
 
         try {
@@ -201,7 +201,7 @@ public class FileHandler {
      * This method save the module objects in the binary format to the file.
      */
     public static void saveRentDataToFile() {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Rent.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Rent.txt");
 
         FileOutputStream fos = null;
         try {
@@ -241,7 +241,7 @@ public class FileHandler {
      * This method loads the module objects in the binary format from the file.
      */
     public static void LoadRentDataFromFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Rent.txt");
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Rent.txt");
         FileInputStream fis = null;
 
         try {

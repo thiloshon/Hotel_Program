@@ -139,6 +139,8 @@ public class Interface {
             }
         }
 
+        start();
+
     }
 
 
@@ -151,12 +153,12 @@ public class Interface {
     public void addNewCustomer() {
         System.out.println("Customer ID Please: ");
         String customerID = null;
-
-        while (!sc.hasNextLine()) {
+        customerID = sc.nextLine();
+       /* while (!sc.hasNextLine()) {
             System.out.println("Integer Please");
-            sc.next();
-        }
-        //studentID = sc.nextLine();
+            customerID=sc.nextLine();
+        }*/
+
 
 
         boolean customerCheck = true;
@@ -168,26 +170,31 @@ public class Interface {
 
         if (customerCheck) {
             System.out.println("Name of the Customer: ");
-            sc.nextLine();
+            //sc.nextLine();
             String name = sc.nextLine();
-            System.out.println("ID of the Student: ");
-            String iD = sc.nextLine();
+            /*System.out.println("ID of the Student: ");
+            String iD = sc.nextLine();*/
 
-            Customer stu = new Customer(name, iD);
+            Customer stu = new Customer(name, customerID);
 
             System.out.println("Customer " + name + " created successfully.");
 
             FileHandler.getCustomerList().add(stu);
             //System.out.println(FileHandler.getStudentsList());
-            System.out.println("Type Room No: ");
+            System.out.println("Room No: ");
             String roomID = sc.nextLine();
 
+            boolean roomCheck = true;
             for (Room st : FileHandler.getRoomList()) {
-                if (!roomID.equalsIgnoreCase(st.getRoomID())) {
-                    System.out.println("No Such Room, Creating one...");
-                    Room room = new Room(roomID, "King");
-                    FileHandler.getRoomList().add(st);
+                if (roomID.equalsIgnoreCase(st.getRoomID())) {
+                    roomCheck=false;
+
                 }
+            }
+            if (roomCheck){
+                System.out.println("No Such Room, Creating one...");
+                Room room = new Room(roomID, "King");
+                FileHandler.getRoomList().add(room);
             }
 
             System.out.println("No of days staying:");
@@ -204,33 +211,33 @@ public class Interface {
 
             //saveData();
         } else {
-            System.out.println("Student " + customerID + " already exists. Want to overwrite? (1/0)");
+            System.out.println("Room No: ");
+            String roomID = sc.nextLine();
 
-            int ans = sc.nextInt();
+            boolean roomCheck = true;
+            for (Room st : FileHandler.getRoomList()) {
+                if (roomID.equalsIgnoreCase(st.getRoomID())) {
+                    roomCheck=false;
 
-            /*if (ans == 1) {
-                System.out.println("Name of the Student: ");
-                sc.nextLine();
-                String name = sc.nextLine();
-                System.out.println("Course of the Student: ");
-                String course = sc.nextLine();
-
-                for (Student st : FileHandler.getStudentsList()) {
-                    if (studentId.equalsIgnoreCase(st.getiDNo())) {
-                        st.setName(name);
-                        st.setCourse(course);
-                    }
                 }
-                //Student stu = new Student(course, studentId, name);
+            }
+            if (roomCheck){
+                System.out.println("No Such Room, Creating one...");
+                Room room = new Room(roomID, "King");
+                FileHandler.getRoomList().add(room);
+            }
 
-                System.out.println("Student " + studentId + " created successfully.");
+            System.out.println("No of days staying:");
+            int days = sc.nextInt();
 
-                //FileHandler.getStudentsList().add(stu);
-                //System.out.println(FileHandler.getStudentsList());
-                start();
-            } else start();*/
+            System.out.println("Amount paid: ");
+            int paid = sc.nextInt();
 
-            //addNewCustomer();
+            Rent rent = new Rent(customerID, roomID, days, paid, 0);
+            FileHandler.getRentList().add(rent);
+
+
+            start();
         }
     }
 
@@ -243,12 +250,14 @@ public class Interface {
             System.out.print(rm.getRoomID());
             for (Rent rent : FileHandler.getRentList()){
                 if (rent.getRoomID().equalsIgnoreCase(rm.getRoomID())){
-                    System.out.println("Occupied by " + rent.getCustomerID());
+                    System.out.println(" Occupied by " + rent.getCustomerID());
                     break;
                 }
             }
             System.out.println("");
         }
+
+        start();
 
     }
 
@@ -260,15 +269,21 @@ public class Interface {
         System.out.println("Enter Customer ID: ");
         String cusID = sc.nextLine();
 
-        for(Rent rt :FileHandler.getRentList()){
-            if(rt.getCustomerID().equalsIgnoreCase(cusID)){
-                System.out.println("The Room is " + rt.getRoomID());
-                FileHandler.getRentList().remove(rt);
-                System.out.println("Rent Deleted!");
-            }else {
-                System.out.println("No Such Rental!");
+        try{
+            for(Rent rt :FileHandler.getRentList()){
+                if(rt.getCustomerID().equalsIgnoreCase(cusID)){
+                    System.out.println("The Room is " + rt.getRoomID());
+                    FileHandler.getRentList().remove(rt);
+                    System.out.println("Rent Deleted!");
+                }else {
+                    System.out.println("No Such Rental!");
+                }
             }
+        }catch (ConcurrentModificationException e){
+
         }
+
+        start();
 
     }
 
@@ -304,6 +319,10 @@ public class Interface {
         FileHandler.LoadCustomerDataFromFile();
         FileHandler.LoadRentDataFromFile();
         FileHandler.LoadRoomDataFromFile();
+        System.out.println("Data Loaded Successfully");
+        start();
+
+
 
 
     }
@@ -316,6 +335,10 @@ public class Interface {
         FileHandler.saveCustomerDataToFile();
         FileHandler.saveRentDataToFile();
         FileHandler.saveRoomDataToFile();
+
+        System.out.println("Data Saved Successfully");
+
+        start();
 
 
     }
