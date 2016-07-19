@@ -7,16 +7,17 @@ import java.util.ArrayList;
  */
 public class FileHandler {
 
-    private static ArrayList<Student> studentsList = new ArrayList<Student>();
-    private static ArrayList<Take> take = new ArrayList<Take>();
-    private static ArrayList<Module> modules = new ArrayList<Module>();
+    private static ArrayList<Customer> customerList = new ArrayList<Customer>();
+    private static ArrayList<Room> roomList = new ArrayList<Room>();
+    private static ArrayList<Rent> rentList = new ArrayList<Rent>();
+
 
 
     /**
      * This method saves the student objects in the binary format to the file.
      */
-    public static void saveStudentDataToFile(){
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Students");
+    public static void saveCustomerDataToFile(){
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Customer.txt");
 
 
         FileOutputStream fos = null;
@@ -31,9 +32,9 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Student stu : studentsList) {
+        for (Customer cus : customerList) {
             try {
-                oos.writeObject(stu);
+                oos.writeObject(cus);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,8 +55,8 @@ public class FileHandler {
     /**
      * This method loads the student objects in the binary format from the file.
      */
-    public static void LoadStudentDataFromFile() {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Students");
+    public static void LoadCustomerDataFromFile() {
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Customer.txt");
         FileInputStream fis = null;
         //System.out.print("hi1");
         try {
@@ -74,10 +75,10 @@ public class FileHandler {
                 ois = new ObjectInputStream(fis);
                 while (ois != null) {
                     try {
-                        Student st = (Student) ois.readObject();
+                        Customer st = (Customer) ois.readObject();
                         // for(Student stu : studentsList){
                         //    if(st.getiDNo()!=stu.getiDNo()){
-                        studentsList.add(st);
+                        customerList.add(st);
                         //   }
                         //  }
 
@@ -115,8 +116,8 @@ public class FileHandler {
     /**
      * This method saves the Take objects in the binary format to the file.
      */
-    public static void saveTakeDataToFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Take");
+    public static void saveRoomDataToFile()  {
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Room.txt");
 
         FileOutputStream fos = null;
         try {
@@ -130,7 +131,7 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Take tke : take) {
+        for (Room tke : roomList) {
             try {
                 oos.writeObject(tke);
             } catch (IOException e) {
@@ -155,8 +156,8 @@ public class FileHandler {
     /**
      * This method loads the take objects in the binary format from the file.
      */
-    public static void LoadTakeDataFromFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Take");
+    public static void LoadRoomDataFromFile()  {
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Room.txt");
         FileInputStream fis = null;
 
         try {
@@ -170,8 +171,8 @@ public class FileHandler {
                 ois = new ObjectInputStream(fis);
                 while (ois != null) {
                     try{
-                        Take st = (Take) ois.readObject();
-                        take.add(st);
+                        Room st = (Room) ois.readObject();
+                        roomList.add(st);
                     }catch (EOFException e){
                     break;
                     }
@@ -199,8 +200,8 @@ public class FileHandler {
     /**
      * This method save the module objects in the binary format to the file.
      */
-    public static void saveModuleDataToFile() {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Module");
+    public static void saveRentDataToFile() {
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Rent.txt");
 
         FileOutputStream fos = null;
         try {
@@ -214,7 +215,7 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Module mde : modules) {
+        for (Rent mde : rentList) {
             try {
                 oos.writeObject(mde);
             } catch (IOException e) {
@@ -239,8 +240,8 @@ public class FileHandler {
     /**
      * This method loads the module objects in the binary format from the file.
      */
-    public static void LoadModulesDataFromFile()  {
-        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Module");
+    public static void LoadRentDataFromFile()  {
+        File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Award Calculation System of UoG CLI Temporary\\Rent.txt");
         FileInputStream fis = null;
 
         try {
@@ -258,8 +259,8 @@ public class FileHandler {
                 ois = new ObjectInputStream(fis);
                 while (ois != null) {
                     try {
-                        Module mde = (Module) ois.readObject();
-                        modules.add(mde);
+                        Rent mde = (Rent) ois.readObject();
+                        rentList.add(mde);
                     } catch (EOFException e) {
                         break;
                     }
@@ -283,17 +284,15 @@ public class FileHandler {
 
     }
 
-
-    public static ArrayList<Student> getStudentsList() {
-        return studentsList;
+    public static ArrayList<Customer> getCustomerList() {
+        return customerList;
     }
 
-    public static ArrayList<Module> getModules() {
-        return modules;
+    public static ArrayList<Rent> getRentList() {
+        return rentList;
     }
 
-    public static ArrayList<Take> getTake() {
-        return take;
+    public static ArrayList<Room> getRoomList() {
+        return roomList;
     }
-
 }

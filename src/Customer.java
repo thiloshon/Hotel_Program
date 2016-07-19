@@ -11,10 +11,9 @@ public class Customer implements java.io.Serializable {
     private String numberOfMembers;
 
 
-    public Customer(String name, String iDNo, String numberOfMembers) {
+    public Customer(String name, String iDNo) {
         this.name = name;
         this.iDNo = iDNo;
-        this.numberOfMembers = numberOfMembers;
     }
 
     @Override
