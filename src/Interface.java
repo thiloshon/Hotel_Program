@@ -58,11 +58,15 @@ public class Interface {
                 sc.next();
             }
             option = sc.nextLine();
+            option = option.toUpperCase();
 
-            if (!(option.equalsIgnoreCase("A") || option.equalsIgnoreCase("V") ||option.equalsIgnoreCase("D") ||option.equalsIgnoreCase("F") ||option.equalsIgnoreCase("S") ||option.equalsIgnoreCase("L") ||option.equalsIgnoreCase("O") )) {
+            if (!(option.equals("A") || option.equals("V") || option.equals("E") || option.equals("D") || option.equals("F")
+                    || option.equals("S") || option.equals("L") || option.equals("O"))) {
                 System.out.println("Please Choose Your Option Among The Letters Given Above:");
             }
-        } while (!(option.equalsIgnoreCase("A") || option.equalsIgnoreCase("V") ||option.equalsIgnoreCase("D") ||option.equalsIgnoreCase("F") ||option.equalsIgnoreCase("S") ||option.equalsIgnoreCase("L") ||option.equalsIgnoreCase("O") ));
+        }
+        while (!(option.equals("A") || option.equals("V") || option.equals("E") || option.equals("D")
+                || option.equals("F") || option.equals("S") || option.equals("L") || option.equals("O")));
 
 
         switch (option) {
@@ -87,26 +91,9 @@ public class Interface {
             case "L":
                 loadData();
                 break;
-            case "a":
-                addNewCustomer();
+            case "O":
+                //sortData();
                 break;
-            case "v":
-                viewRooms();
-                break;
-            case "e":
-                displayEmptyRooms();
-                break;
-            case "d":
-                deleteCustomer();
-                break;
-            case "f":
-                findRoomFromName();
-                break;
-            case "s":
-                saveData();
-                break;
-            case "l":
-                loadData();
 
         }
     }
