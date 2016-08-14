@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Thiloshon on 13-Aug-16.
@@ -6,35 +6,48 @@ import java.util.Scanner;
 public class Queue {
 
     
-    static Object queueArray[] = new Object[7];
-    static int front = 0, end = 0;
+    static Rent queueArray[] = new Rent[7];
+    static int front = -1, end = -1;
 
-    static void addqueue(Object object) {//1 rent, 2 customer, 3 room
 
-        if (end == 6) {
+
+    static void addToQueue(Rent rent) {//1 rent, 2 customer, 3 room
+
+        if (front == -1){
+            front++;
+            end++;
+            queueArray[end] = rent;
+        } else if (end == 6) {
             System.out.println("The queue is full. The first value will be replaced by the new value");
             end = 0;
             front = 1;
-            queueArray[end] = object;
-
-        }else if (front<end){
-            queueArray[end] = object;
+            // TODO Peek Queue Implement here:
+            queueArray[end] = rent;
+        }else if (front<=end){
             end++;
-        }else {
-            System.out.println("The queue is full. The first value will be replaced by the new value");
+            queueArray[end] = rent;
 
+        }else if (front==6){
+            System.out.println("The queue is full. The first value will be replaced by the new value");
+            // TODO Peek Queue Implement here:
+            end++;
+            front = 0;
+            queueArray[end] = rent;
+        }else if (end<front){
+            System.out.println("The queue is full. The first value will be replaced by the new value");
+            // TODO Peek Queue Implement here:
+            end++;
+            front++;
+            queueArray[end] = rent;
         }
 
 
     }
 
-    static void takequeue() {
-        if (end > front) {
-            System.out.println("Item taken :" + queueArray[front]);
-            front++;
-        } else {
-            System.out.println("Empty queue");
-        }
+    static Rent takeFromQueue() {
+
+    return queueArray[front];
+
     }
 
     static void displayqueue() {
