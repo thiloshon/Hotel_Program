@@ -9,7 +9,9 @@ public class FileHandler {
 
     private static ArrayList<Customer> customerList = new ArrayList<Customer>();
     private static ArrayList<Room> roomList = new ArrayList<Room>();
-    private static ArrayList<Rent> rentList = new ArrayList<Rent>();
+    //private static ArrayList<Rent> rentList = new ArrayList<Rent>();
+
+    private static Queue rentQueue = new Queue();
 
 
 
@@ -42,7 +44,7 @@ public class FileHandler {
         }
 
         try {
-            oos.flush();
+            //oos.flush();
             oos.close();
             fos.close();
         } catch (IOException e) {
@@ -64,7 +66,7 @@ public class FileHandler {
             fis = new FileInputStream(file);
 
         } catch (FileNotFoundException e) {
-            System.out.println("File Not Found1");
+            System.out.println("File Not Found");
         }
         ObjectInputStream ois = null;
 
@@ -141,7 +143,7 @@ public class FileHandler {
         }
 
         try {
-            oos.flush();
+            //oos.flush();
             oos.close();
             fos.close();
         } catch (IOException e) {
@@ -198,9 +200,6 @@ public class FileHandler {
 
 
 
-    /**
-     * This method save the module objects in the binary format to the file.
-     */
     public static void saveRentDataToFile() {
         File file = new File("C:\\Users\\Thiloshon\\IdeaProjects\\Hotel Program\\src\\Rent.txt");
 
@@ -216,12 +215,10 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Rent mde : rentList) {
-            try {
-                oos.writeObject(mde);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            oos.writeObject(rentQueue);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try {
@@ -235,7 +232,6 @@ public class FileHandler {
 
 
     }
-
 
 
     /**
@@ -255,13 +251,11 @@ public class FileHandler {
 
 
         try {
-
             if (fis.available() != 0) {
                 ois = new ObjectInputStream(fis);
                 while (ois != null) {
                     try {
-                        Rent mde = (Rent) ois.readObject();
-                        rentList.add(mde);
+                        rentQueue = (Queue) ois.readObject();
                     } catch (EOFException e) {
                         break;
                     }
@@ -285,15 +279,20 @@ public class FileHandler {
 
     }
 
+
     public static ArrayList<Customer> getCustomerList() {
         return customerList;
     }
 
-    public static ArrayList<Rent> getRentList() {
-        return rentList;
-    }
+
 
     public static ArrayList<Room> getRoomList() {
         return roomList;
     }
+
+    public static Queue getRentQueue() {
+        return rentQueue;
+    }
+
+
 }

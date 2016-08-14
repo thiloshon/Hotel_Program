@@ -17,7 +17,7 @@ public class Interface {
     /**
      * The First output. Welcome page.
      */
-    public void welcomePage() {
+    public void run() {
 
 
         //loadData(); // First load of data
@@ -30,6 +30,7 @@ public class Interface {
         System.out.println("                  WELCOME TO THE HOTEL PROGRAM");
         System.out.println("");
 
+        start();
     }
 
 
@@ -44,10 +45,11 @@ public class Interface {
         System.out.println("A Add New Customer To A Room");
         System.out.println("V View All Rooms");
         System.out.println("D Delete Customer From Room");
-        System.out.println("F Find Room From Customer Name");
+        //System.out.println("F Find Room From Customer Name");
         System.out.println("S Store Program Array Data Into A Plain Text File");
         System.out.println("L Load Program Data Back From The File Into The Array");
-        System.out.println("O View Rooms Ordered Alphabetically By Name");
+        //System.out.println("O View Rooms Ordered Alphabetically By Name");
+        System.out.println("T View First Three Customers");
         System.out.println("");
 
         String option;
@@ -61,12 +63,12 @@ public class Interface {
             option = option.toUpperCase();
 
             if (!(option.equals("A") || option.equals("V") || option.equals("E") || option.equals("D") || option.equals("F")
-                    || option.equals("S") || option.equals("L") || option.equals("O"))) {
+                    || option.equals("S") || option.equals("L") || option.equals("T"))) {
                 System.out.println("Please Choose Your Option Among The Letters Given Above:");
             }
         }
         while (!(option.equals("A") || option.equals("V") || option.equals("E") || option.equals("D")
-                || option.equals("F") || option.equals("S") || option.equals("L") || option.equals("O")));
+                || option.equals("F") || option.equals("S") || option.equals("L") || option.equals("T")));
 
 
         switch (option) {
@@ -83,7 +85,7 @@ public class Interface {
                 deleteCustomer();
                 break;
             case "F":
-                findRoomFromName();
+                //findRoomFromName();
                 break;
             case "S":
                 saveData();
@@ -91,15 +93,12 @@ public class Interface {
             case "L":
                 loadData();
                 break;
-            case "O":
-                //sortData();
+            case "T":
+                sortData();//TODO Change method name
                 break;
 
         }
     }
-
-
-
 
 
     /**
@@ -107,23 +106,23 @@ public class Interface {
      */
     public void findRoomFromName() {
         System.out.println("Customer name Please: ");
-        String name= sc.nextLine();
+        String name = sc.nextLine();
 
-        String id =null;
-        for(Customer cus : FileHandler.getCustomerList()){
-            if (cus.getName().equalsIgnoreCase(name)){
-                id=cus.getiDNo();
+        String id = null;
+        for (Customer cus : FileHandler.getCustomerList()) {
+            if (cus.getName().equalsIgnoreCase(name)) {
+                id = cus.getiDNo();
             }
         }
 
-        if (id==null){
+        if (id == null) {
             System.out.println("No such Customer");
-        }else {
-            for(Rent rt : FileHandler.getRentList()){
+        } else {
+            /*for(Rent rt : FileHandler.getRentList()){
                if (rt.getCustomerID().equalsIgnoreCase(id)){
                    System.out.print(rt.getRoomID());
                }
-            }
+            }*/
         }
 
         start();
@@ -131,16 +130,22 @@ public class Interface {
     }
 
 
-
-
-
     /**
      * Method to add new Student.
      */
-    public void addNewCustomer() {
+    public void addNewCustomer() { //TODO Validations
         System.out.println("Customer ID Please: ");
-        String customerID = null;
-        customerID = sc.nextLine();
+        String customerID = sc.nextLine();
+
+        System.out.println("Room ID Please: ");
+        String roomID = sc.nextLine();
+
+        Rent rent = new Rent(customerID, roomID, 4, 1000, 500);
+
+
+        FileHandler.getRentQueue().addToQueue(rent);
+
+        FileHandler.getRentQueue().testPeek();
        /* while (!sc.hasNextLine()) {
             System.out.println("Integer Please");
             customerID=sc.nextLine();
@@ -148,7 +153,7 @@ public class Interface {
 
 
 
-        boolean customerCheck = true;
+       /* boolean customerCheck = true;
         for (Customer st : FileHandler.getCustomerList()) {
             if (customerID.equalsIgnoreCase(st.getiDNo())) {
                 customerCheck = false;
@@ -159,8 +164,8 @@ public class Interface {
             System.out.println("Name of the Customer: ");
             //sc.nextLine();
             String name = sc.nextLine();
-            /*System.out.println("ID of the Student: ");
-            String iD = sc.nextLine();*/
+            *//*System.out.println("ID of the Student: ");
+            String iD = sc.nextLine();*//*
 
             Customer stu = new Customer(name, customerID);
 
@@ -225,24 +230,18 @@ public class Interface {
 
 
             start();
-        }
+        }*/
+
+        start();
     }
 
 
     /**
      * This method adds marks of the students.
      */
-    public void viewRooms(){
-        for (Room rm : FileHandler.getRoomList()){
-            System.out.print(rm.getRoomID());
-            for (Rent rent : FileHandler.getRentList()){
-                if (rent.getRoomID().equalsIgnoreCase(rm.getRoomID())){
-                    System.out.println(" Occupied by " + rent.getCustomerID());
-                    break;
-                }
-            }
-            System.out.println("");
-        }
+    public void viewRooms() {
+        FileHandler.getRentQueue().traverseThroughQueue();
+
 
         start();
 
@@ -253,22 +252,7 @@ public class Interface {
      * This method gives the award of the student queried.
      */
     public void deleteCustomer() {
-        System.out.println("Enter Customer ID: ");
-        String cusID = sc.nextLine();
 
-        try{
-            for(Rent rt :FileHandler.getRentList()){
-                if(rt.getCustomerID().equalsIgnoreCase(cusID)){
-                    System.out.println("The Room is " + rt.getRoomID());
-                    FileHandler.getRentList().remove(rt);
-                    System.out.println("Rent Deleted!");
-                }else {
-                    System.out.println("No Such Rental!");
-                }
-            }
-        }catch (ConcurrentModificationException e){
-
-        }
 
         start();
 
@@ -279,20 +263,22 @@ public class Interface {
      * The method prints all the students enrolled.
      */
     public void displayEmptyRooms() {
-        for (Room rm : FileHandler.getRoomList()){
+        for (Room rm : FileHandler.getRoomList()) {
             //System.out.print(rm.getRoomID());
-            boolean isFree=true;
-            for (Rent rent : FileHandler.getRentList()){
-                if (rent.getRoomID().equalsIgnoreCase(rm.getRoomID())){
-                    System.out.println("Occupied by " + rent.getCustomerID());
-                    isFree=false;
-                    break;
+            boolean isFree = true;
+
+            for (int x = FileHandler.getRentQueue().front; x <= FileHandler.getRentQueue().end; ) {
+                if (rm.getRoomID().equalsIgnoreCase(FileHandler.getRentQueue().queueArray[x].getCustomerID())) {
+                    isFree = false;
                 }
             }
-            if(isFree){
+
+
+            //System.out.println("Occupied by " + rent.getCustomerID());
+
+            if (isFree) {
                 System.out.println(rm.getRoomID());
             }
-
         }
 
     }
@@ -308,8 +294,6 @@ public class Interface {
         FileHandler.LoadRoomDataFromFile();
         System.out.println("Data Loaded Successfully");
         start();
-
-
 
 
     }
@@ -328,6 +312,11 @@ public class Interface {
         start();
 
 
+    }
+
+    public void sortData() {
+        FileHandler.getRentQueue().displayQueue();
+        start();
     }
 
 }
