@@ -29,8 +29,6 @@ public class Customer implements java.io.Serializable {
         return iDNo;
     }
 
-
-
     public String getName() {
         return name;
     }

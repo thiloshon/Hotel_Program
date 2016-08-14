@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Created by Thiloshon on 25-Apr-16.
  *
- * The Take ModelClass. Each attempt of each module creates one take object.
+ * The Rent ModelClass. Each renting of room creates one rent object.
  */
 public class Rent implements java.io.Serializable{
 

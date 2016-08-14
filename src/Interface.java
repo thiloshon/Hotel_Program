@@ -314,6 +314,9 @@ public class Interface {
 
     }
 
+    /**
+     * This method dequeue and print it to the screen.
+     */
     public void sortData() {
         FileHandler.getRentQueue().displayQueue();
         start();
